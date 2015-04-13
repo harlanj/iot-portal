@@ -147,10 +147,10 @@ function start() {
   });
 
   console.log('get light 2 status');
-  getLight(2, function() {
+  getLight(2, function(err, res) {
     if (err) console.log('err', err);
     if (res) console.log('res', res);
   });
-};
+}
 
 start();
