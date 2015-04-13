@@ -45,7 +45,7 @@ app.recognition.onresult = function(event) {
 };
 
 app.updateError = function(err) {
-  var message = !err.message && err.error === 'not-allowed' ? 'Permission to use microphone denied' : err.message;
+  var message = !err.message && err.error === 'not-allowed' ? 'Permission to use microphone denied' : err.message ? err.message : err;
   $('.lead').text(message);
   $('#errorModal').foundation('reveal', 'open');
 };
