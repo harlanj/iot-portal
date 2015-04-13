@@ -45,7 +45,7 @@ app.recognition.onresult = function(event) {
 };
 
 app.updateError = function(err) {
-  var message = !err.message && err.error === 'not-allowed' ? 'Permission to use microphone denied' : err.message ? err.message : err;
+  var message = !err.message && err.error === 'not-allowed' ? 'Permission to use microphone denied' : err.message;
   $('.lead').text(message);
   $('#errorModal').foundation('reveal', 'open');
 };
@@ -117,7 +117,7 @@ var setLight = function(light, status, callback) {
     },
     error: function(data) {
       updateStatus(light, {status: status, success: false, error: data.responseJSON.message});
-      updateError(data.responseJSON.message);
+      updateError(data.responseJSON);
       callback(data.responseJSON);
     }
   });
@@ -133,7 +133,7 @@ var getLight = function(light, callback) {
     },
     error: function(data) {
       updateStatus(light, {status: status, success: false, error: data.responseJSON.message});
-      updateError(data.responseJSON.message);
+      updateError(data.responseJSON);
       callback(data.responseJSON);
     }
   });
