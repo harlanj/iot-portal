@@ -64,7 +64,7 @@ var checkCommand = function(command) {
     case ' set the mood':
     case 'set the mood':
       console.log('***turning on bedroom light');
-      callApi(1, 'on', function(err, res) {
+      setLight(1, 'on', function(err, res) {
         if (err) console.log('error', err);
         if (res) console.log('success', res);
       });
@@ -72,7 +72,7 @@ var checkCommand = function(command) {
     case ' turn on bedroom light':
     case 'turn on bedroom light':
       console.log('***turning on bedroom light');
-      callApi(1, 'on', function(err, res) {
+      setLight(1, 'on', function(err, res) {
         if (err) console.log('error', err);
         if (res) console.log('success', res);
       });
@@ -80,7 +80,7 @@ var checkCommand = function(command) {
     case ' turn off bedroom light':
     case 'turn off bedroom light':
       console.log('***turning off bedroom light');
-      callApi(1, 'off', function(err, res) {
+      setLight(1, 'off', function(err, res) {
         if (err) console.log('error', err);
         if (res) console.log('success', res);
       });
@@ -88,7 +88,7 @@ var checkCommand = function(command) {
     case ' turn on bedroom lamp':
     case 'turn on bedroom lamp':
       console.log('***turning on bedroom lamp');
-      callApi(2, 'on', function(err, res) {
+      setLight(2, 'on', function(err, res) {
         if (err) console.log('error', err);
         if (res) console.log('success', res);
       });
@@ -96,7 +96,7 @@ var checkCommand = function(command) {
     case ' turn off bedroom lamp':
     case 'turn off bedroom lamp':
       console.log('***turning off bedroom lamp');
-      callApi(2, 'off', function(err, res) {
+      setLight(2, 'off', function(err, res) {
         if (err) console.log('error', err);
         if (res) console.log('success', res);
       });
@@ -107,15 +107,50 @@ var checkCommand = function(command) {
   }
 };
 
-var callApi = function(light, status, callback) {
+var setLight = function(light, status, callback) {
   $.ajax({
     url: rootUrl + '/hue/light/' + light + '/' + status,
     type: 'GET',
     success: function (data) {
+      updateStatus(light, {status: status, success: true});
       callback(null, data);
     },
     error: function(data) {
+      updateStatus(light, {status: status, success: false, error: data.responseJSON.message});
+      updateError(data.responseJSON.message);
       callback(data.responseJSON);
     }
   });
 };
+
+var getLight = function(light, callback) {
+  $.ajax({
+    url: rootUrl + '/hue/light/' + light,
+    type: 'GET',
+    success: function (data) {
+      updateStatus(light, {status: status, success: true});
+      callback(null, data);
+    },
+    error: function(data) {
+      updateStatus(light, {status: status, success: false, error: data.responseJSON.message});
+      updateError(data.responseJSON.message);
+      callback(data.responseJSON);
+    }
+  });
+};
+
+function start() {
+  console.log('get light 1 status');
+  getLight(1, function(err, res) {
+    if (err) console.log('err', err);
+    if (res) console.log('res', res);
+  });
+
+  console.log('get light 2 status');
+  getLight(2, function() {
+    if (err) console.log('err', err);
+    if (res) console.log('res', res);
+  });
+};
+
+start();

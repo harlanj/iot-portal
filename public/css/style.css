@@ -1,3 +1,7 @@
+body, .header {
+  font-family: 'Raleway', serif;
+}
+
 .results {
   font-size: 14px;
   font-weight: bold;
@@ -15,6 +19,5 @@
 .drop-mic {
   width: 480;
   height: 270;
-  frameBorder: 0;
   max-width: 100%;
 }
