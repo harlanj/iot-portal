@@ -1,5 +1,6 @@
 {
   "name": "iot-portal",
+  "mod-project-name": "iot-portal",
   "version": "1.0.0",
   "description": "Front end to IoT-Home",
   "main": "iot-portal.js",
