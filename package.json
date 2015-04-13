@@ -1,0 +1,16 @@
+{
+  "name": "iot-portal",
+  "version": "1.0.0",
+  "description": "Front end to IoT-Home",
+  "main": "iot-portal.js",
+  "scripts": {
+    "start": "nodemon iot-portal.js"
+  },
+  "dependencies": {
+    "express": "~4.12.3",
+    "jade": "~1.9.2"
+  },
+  "engines": {
+    "node": "0.10.x"
+  }
+}

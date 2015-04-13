@@ -1,0 +1,49 @@
+doctype html(lang='en')
+head
+  meta(charset='UTF-8')
+  meta(name='description', content='IoT-Portal | Front end application to IoT-Home')
+  link(rel='stylesheet', href='http://cdn.foundation5.zurb.com/foundation.css')
+  link(rel='stylesheet', href='//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css')
+  link(rel='stylesheet', href='/css/style.css')
+  title #{title}
+  body
+    .supported
+      .row
+        .large-3.columns
+          h1
+            img(src='http://placehold.it/400x100&text=Logo')
+        .large-9.columns
+          ul.right.button-group
+            li
+              a.button(href='#') Link 1
+            li
+              a.button(href='#') Link 2
+            li
+              a.button(href='#') Link 3
+            li
+              a.button(href='#') Link 4
+      .row
+        .large-12.columns
+          .results
+            i.fa.fa-microphone.fa-3x.right
+            img.mic-animate.right(src='https://www.google.com/intl/en/chrome/assets/common/images/content/mic-animate.gif', alt="")
+            p.speech-results
+          hr
+      .row
+        .large-6.columns
+          //- iframe(src='http://www.ustream.tv/embed/20364838?v=3&amp;wmode=direct', width='470', height='300', scrolling='no', frameborder='0')
+          img(src='http://placehold.it/600x300&text=[img]')
+          h4 This is a content section.
+          p Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit, dolore aliqua non est magna in labore pig pork biltong. Eiusmod swine spare ribs reprehenderit culpa. Boudin aliqua adipisicing rump corned beef.
+        .large-6.columns
+          img(src='http://placehold.it/600x300&text=[img]')
+          h4 This is a content section.
+          p Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit, dolore aliqua non est magna in labore pig pork biltong. Eiusmod swine spare ribs reprehenderit culpa. Boudin aliqua adipisicing rump corned beef.
+    .reveal-modal#errorModal(data-reveal aria-labelledby='modalTitle',aria-hidden='true',role='dialog')
+      h2.text-center#modalTitle Speech API Error
+      p.lead.text-center Unexpected Error Occurred
+      h1.text-center
+        img(src='https://media.giphy.com/media/149R89yoMrIFgI/giphy.gif')
+  script(type='text/javascript', src='//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js')
+  script(type='text/javascript', src='http://cdn.foundation5.zurb.com/foundation.js')
+  script(type='text/javascript', src='/js/script.js')
