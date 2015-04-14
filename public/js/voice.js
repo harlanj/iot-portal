@@ -1,5 +1,3 @@
-var rootUrl = 'http://iothome.mod.bz';
-
 var app = this;
 var running = false;
 
@@ -65,40 +63,60 @@ var checkCommand = function(command) {
     case 'set the mood':
       console.log('***turning on bedroom light');
       setLight(1, 'on', function(err, res) {
-        if (err) console.log('error', err);
-        if (res) console.log('success', res);
+        if (err) {
+          updateStatus(1, {type: 'setState', status: 'on', success: false, error: err});
+          updateError(err);
+        } else {
+          updateStatus(1, {type: 'setState', status: 'on', success: true});
+        }
       });
       break;
     case ' turn on bedroom light':
     case 'turn on bedroom light':
       console.log('***turning on bedroom light');
       setLight(1, 'on', function(err, res) {
-        if (err) console.log('error', err);
-        if (res) console.log('success', res);
+        if (err) {
+          updateStatus(1, {type: 'setState', status: 'on', success: false, error: err});
+          updateError(err);
+        } else {
+          updateStatus(1, {type: 'setState', status: 'on', success: true});
+        }
       });
       break;
     case ' turn off bedroom light':
     case 'turn off bedroom light':
       console.log('***turning off bedroom light');
       setLight(1, 'off', function(err, res) {
-        if (err) console.log('error', err);
-        if (res) console.log('success', res);
+        if (err) {
+          updateStatus(1, {type: 'setState', status: 'off', success: false, error: err});
+          updateError(err);
+        } else {
+          updateStatus(1, {type: 'setState', status: 'off', success: true});
+        }
       });
       break;
     case ' turn on bedroom lamp':
     case 'turn on bedroom lamp':
       console.log('***turning on bedroom lamp');
       setLight(2, 'on', function(err, res) {
-        if (err) console.log('error', err);
-        if (res) console.log('success', res);
+        if (err) {
+          updateStatus(2, {type: 'setState', status: 'on', success: false, error: err});
+          updateError(err);
+        } else {
+          updateStatus(2, {type: 'setState', status: 'on', success: true});
+        }
       });
       break;
     case ' turn off bedroom lamp':
     case 'turn off bedroom lamp':
       console.log('***turning off bedroom lamp');
       setLight(2, 'off', function(err, res) {
-        if (err) console.log('error', err);
-        if (res) console.log('success', res);
+        if (err) {
+          updateStatus(2, {type: 'setState', status: 'off', success: false, error: err});
+          updateError(err);
+        } else {
+          updateStatus(2, {type: 'setState', status: 'off', success: true});
+        }
       });
       break;
     default:
@@ -107,50 +125,26 @@ var checkCommand = function(command) {
   }
 };
 
-var setLight = function(light, status, callback) {
-  $.ajax({
-    url: rootUrl + '/hue/light/' + light + '/' + status,
-    type: 'GET',
-    success: function (data) {
-      updateStatus(light, {status: status, success: true});
-      callback(null, data);
-    },
-    error: function(data) {
-      updateStatus(light, {status: status, success: false, error: data.responseJSON.message});
-      updateError(data.responseJSON);
-      callback(data.responseJSON);
-    }
-  });
-};
-
-var getLight = function(light, callback) {
-  $.ajax({
-    url: rootUrl + '/hue/light/' + light,
-    type: 'GET',
-    success: function (data) {
-      updateStatus(light, {status: status, success: true});
-      callback(null, data);
-    },
-    error: function(data) {
-      updateStatus(light, {status: status, success: false, error: data.responseJSON.message});
-      updateError(data.responseJSON);
-      callback(data.responseJSON);
-    }
-  });
-};
-
-function start() {
+var init = function () {
   console.log('get light 1 status');
   getLight(1, function(err, res) {
-    if (err) console.log('err', err);
-    if (res) console.log('res', res);
+    if (err) {
+      updateStatus(1, {type: 'getState', success: false, error: err});
+      updateError(err);
+    } else {
+      updateStatus(1, {type: 'getState', status: res.light, success: true});
+    }
   });
 
   console.log('get light 2 status');
   getLight(2, function(err, res) {
-    if (err) console.log('err', err);
-    if (res) console.log('res', res);
+    if (err) {
+      updateStatus(2, {type: 'getState', success: false, error: err});
+      updateError(err);
+    } else {
+      updateStatus(2, {type: 'getState', status: res.light, success: true});
+    }
   });
 }
 
-start();
+init();

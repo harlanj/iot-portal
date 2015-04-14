@@ -3,11 +3,20 @@ var lightTwo = $('.light-two');
 
 var updateStatus = function(light, results) {
   light = light === 1 ? lightOne : lightTwo;
+
+  switch (results.type) {
+    case ('setHue'):
+      status = !results.success ? results.error.message : 'Light hue: ' + results.hue;
+      break;
+    case ('setState'):
+      status = !results.success ? results.error.message : 'Light status: ' + results.status;
+      break;
+    case ('getState'):
+      status = !results.success ? results.error.message : 'Light status: ' + results.status;
+      break;
+  }
+
   var date = moment().format('dddd, MMMM Do YYYY, h:mm:ss a');
-  var status = !results.success ? results.error : 'Light status: ' + results.status;
   status = '<p>' + date + ' ' + status + '</p>';
   light.after(status);
 };
-
-
-// $("#mydiv div:first-child").after(newDiv);
