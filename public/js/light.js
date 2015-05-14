@@ -12,7 +12,7 @@ var updateStatus = function(light, results) {
       status = !results.success ? results.error.message : 'Light status: ' + results.status;
       break;
     case ('getState'):
-      status = !results.success ? results.error.message : 'Light status: ' + results.status;
+      status = !results.success ? results.error.message : 'Light status: ' + (results.status ? 'on' : 'off');
       break;
   }
 

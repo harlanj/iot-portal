@@ -1,5 +1,5 @@
-var rootUrl = 'http://iothome.mod.bz';
-// var rootUrl = 'http://localhost:8015';
+// var rootUrl = 'http://iothome.mod.bz';
+var rootUrl = 'http://localhost:8015';
 
 var getLight = function(light, callback) {
   $.ajax({
@@ -28,10 +28,11 @@ var setLight = function(light, status, callback) {
 };
 
 var setHue = function(light, hue, callback) {
+  console.log(arguments);
   $.ajax({
     url: rootUrl + '/hue/light/' + light + '/set',
     type: 'PUT',
-    body: { brightness: hue },
+    data: { brightness: hue },
     success: function(data) {
       callback(null, data);
     },

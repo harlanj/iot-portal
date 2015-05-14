@@ -60,14 +60,24 @@ $('.mic-animate').click(function() {
 var checkCommand = function(command) {
   switch(command) {
     case ' set the mood':
-    case 'set the mood':
-      console.log('***turning on bedroom light');
-      setLight(1, 'on', function(err, res) {
+      console.log('***setting the mood');
+      setHue(1, 25, function(err, res) {
         if (err) {
-          updateStatus(1, {type: 'setState', status: 'on', success: false, error: err});
+          updateStatus(1, {type: 'setHue', success: false, error: err});
           updateError(err);
         } else {
-          updateStatus(1, {type: 'setState', status: 'on', success: true});
+          updateStatus(1, {type: 'setHue', success: true, hue: 25});
+        }
+      });
+      break;
+    case 'set the mood':
+      console.log('***setting the mood');
+      setHue(1, 25, function(err, res) {
+        if (err) {
+          updateStatus(1, {type: 'setHue', success: false, error: err});
+          updateError(err);
+        } else {
+          updateStatus(1, {type: 'setHue', success: true, hue: 25});
         }
       });
       break;
@@ -132,7 +142,7 @@ var init = function () {
       updateStatus(1, {type: 'getState', success: false, error: err});
       updateError(err);
     } else {
-      updateStatus(1, {type: 'getState', status: res.light, success: true});
+      updateStatus(1, {type: 'getState', status: res.light.state.on, success: true});
     }
   });
 
@@ -142,7 +152,7 @@ var init = function () {
       updateStatus(2, {type: 'getState', success: false, error: err});
       updateError(err);
     } else {
-      updateStatus(2, {type: 'getState', status: res.light, success: true});
+      updateStatus(2, {type: 'getState', status: res.light.state.on, success: true});
     }
   });
 }
