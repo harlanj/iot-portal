@@ -1,5 +1,5 @@
-// var rootUrl = 'http://iothome.mod.bz';
-var rootUrl = 'http://localhost:8015';
+var rootUrl = 'http://iothome.mod.bz';
+// var rootUrl = 'http://localhost:8015';
 
 var getLight = function(light, callback) {
   $.ajax({
